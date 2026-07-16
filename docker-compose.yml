@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+
+  postgres:
+    image: postgres:17
+    container_name: smart-incident-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: smart_incident_management
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+
+  backend:
+    image: vlikitha/incident-management-backend:v1
+    container_name: smart-incident-backend
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+
+      DB_URL: jdbc:postgresql://postgres:5432/smart_incident_management
+      DB_USERNAME: postgres
+      DB_PASSWORD: root
+
+      JWT_SECRET: smart-incident-management-secret-key-which-is-very-secure-123456
+      JWT_EXPIRATION: 3600000
+
+      GMAIL_USERNAME: your-email
+      GMAIL_PASSWORD: your-app-password
+
+
+  frontend:
+    image: vlikitha/smart-incident-frontend:v1
+    container_name: smart-incident-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+
+
+volumes:
+
+  postgres-data:

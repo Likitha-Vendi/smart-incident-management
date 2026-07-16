@@ -1,9 +1,12 @@
 spring:
+
   config:
-    import: optional:file:.env.properties
+    import: optional:file:./.env.properties
+
 
   application:
     name: smart-incident-management
+
 
   datasource:
     url: ${DB_URL}
@@ -11,11 +14,14 @@ spring:
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
+
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${GMAIL_USERNAME:${MAIL_USERNAME:}}
-    password: ${GMAIL_PASSWORD:${MAIL_PASSWORD:}}
+
+    username: ${GMAIL_USERNAME}
+    password: ${GMAIL_PASSWORD}
+
     properties:
       mail:
         smtp:
@@ -23,44 +29,37 @@ spring:
           starttls:
             enable: true
 
+
   jpa:
     hibernate:
       ddl-auto: update
+
     show-sql: true
+
     properties:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
-# ✅ OUTSIDE spring
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    prometheus:
-      enabled: true
-  metrics:
-    export:
-      prometheus:
-        enabled: true
 
-logging:
-  level:
-    root: INFO
-    com.smartims: DEBUG
-
-server:
-  port: ${PORT:8080}
-
-app:
-  mail:
-    from: ${MAIL_FROM:${GMAIL_USERNAME:${MAIL_USERNAME:no-reply@smartims.local}}}
-  frontend:
-    login-url: ${FRONTEND_LOGIN_URL:http://localhost:5173/login}
 
 jwt:
-  secret: ${JWT_SECRET:ThisIsASecretKeyForJwtSigningMustBeAtLeast32Chars}
+
+  secret: ${JWT_SECRET}
+
   expiration:
     ms: ${JWT_EXPIRATION:3600000}
+
+
+
+logging:
+
+  level:
+
+    root: INFO
+
+    com.smartims: DEBUG
+
+    org.springframework.mail: DEBUG
+
+    org.eclipse.angus.mail: DEBUG

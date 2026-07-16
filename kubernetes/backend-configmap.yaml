@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: backend-config
+  namespace: servicepulse
+
+data:
+
+  DB_URL: jdbc:postgresql://postgres:5432/servicepulse
+
+  DB_USERNAME: servicepulse
+
+  JWT_EXPIRATION: "3600000"
