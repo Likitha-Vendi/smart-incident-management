@@ -21,7 +21,7 @@ spec:
       containers:
       - name: frontend
 
-        image: vlikitha/smart-incident-frontend:v1
+        image: vlikitha/smart-incident-frontend:v2
 
         imagePullPolicy: IfNotPresent
 
