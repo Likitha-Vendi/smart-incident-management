@@ -17,6 +17,7 @@ target/
 **/application.yml
 **/application.properties
 .env
+.env.properties
 application.properties
 
 
