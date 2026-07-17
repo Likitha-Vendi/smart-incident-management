@@ -51,6 +51,12 @@ pipeline {
             }
         }
 
+        stage('Docker Build Frontend') {
+            steps {
+                bat 'docker build -t vlikitha/smart-incident-frontend:latest frontend'
+            }
+        }
+
     }
 
 }
