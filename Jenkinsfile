@@ -45,6 +45,12 @@ pipeline {
             }
         }
 
+        stage('Docker Build Backend') {
+            steps {
+                bat 'docker build -t vlikitha/incident-management-backend:latest backend'
+            }
+        }
+
     }
 
 }
