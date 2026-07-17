@@ -76,6 +76,12 @@ pipeline {
             }
         }
 
+        stage('Kubernetes Test') {
+            steps {
+                bat 'kubectl get pods -n servicepulse'
+            }
+        }
+
     }
 
 }
