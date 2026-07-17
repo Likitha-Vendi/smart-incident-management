@@ -76,9 +76,29 @@ pipeline {
             }
         }
 
-        stage('Kubernetes Test') {
+
+        stage('Kubernetes Deploy') {
             steps {
+
+                echo 'Deploying application to Kubernetes'
+
+                bat 'kubectl apply -f kubernetes/backend-deployment.yaml'
+                bat 'kubectl apply -f kubernetes/frontend-deployment.yaml'
+
+                bat 'kubectl rollout status deployment/backend -n servicepulse'
+                bat 'kubectl rollout status deployment/frontend -n servicepulse'
+
+            }
+        }
+
+
+        stage('Kubernetes Verification') {
+            steps {
+
+                echo 'Checking Kubernetes pods'
+
                 bat 'kubectl get pods -n servicepulse'
+
             }
         }
 
