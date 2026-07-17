@@ -57,6 +57,25 @@ pipeline {
             }
         }
 
+        stage('Docker Login') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-credentials',
+                    usernameVariable: 'DOCKER_USERNAME',
+                    passwordVariable: 'DOCKER_PASSWORD'
+                )]) {
+                    bat 'docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%'
+                }
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                bat 'docker push vlikitha/incident-management-backend:latest'
+                bat 'docker push vlikitha/smart-incident-frontend:latest'
+            }
+        }
+
     }
 
 }
