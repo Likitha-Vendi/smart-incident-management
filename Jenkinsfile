@@ -26,6 +26,16 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+            steps {
+                dir('backend') {
+                    withSonarQubeEnv('SonarQube') {
+                        bat 'mvn sonar:sonar'
+                    }
+                }
+            }
+        }
+
         stage('Build Frontend') {
             steps {
                 dir('frontend') {
