@@ -1,29 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
   name: frontend
   namespace: servicepulse
-
 spec:
   replicas: 1
-
   selector:
     matchLabels:
       app: frontend
-
   template:
     metadata:
       labels:
         app: frontend
-
     spec:
       containers:
-      - name: frontend
-
-        image: vlikitha/smart-incident-frontend:v2
-
-        imagePullPolicy: IfNotPresent
-
-        ports:
-        - containerPort: 80
+        - name: frontend
+          image: vlikitha/smart-incident-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
