@@ -1,0 +1,26 @@
+backend:
+  name: backend
+  image: vlikitha/incident-management-backend
+  tag: latest
+  replicaCount: 1
+  containerPort: 8080
+  servicePort: 8080
+
+frontend:
+  name: frontend
+  image: vlikitha/smart-incident-frontend
+  tag: latest
+  replicaCount: 1
+  containerPort: 80
+  servicePort: 80
+
+postgres:
+  name: postgres
+  image: postgres
+  tag: latest
+  replicaCount: 1
+  containerPort: 5432
+  servicePort: 5432
+
+namespace:
+  name: servicepulse
